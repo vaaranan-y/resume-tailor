@@ -11,6 +11,9 @@ import java.util.HashMap;
 @Entity
 @Getter @Setter @NoArgsConstructor 
 public class ResumeData { 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     private long userId;
     private String surname;
