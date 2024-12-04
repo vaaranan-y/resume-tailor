@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor 
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -26,7 +26,7 @@ public class User {
         2. Add lazy getters for lazy loading (i.e. make loading PDFs more efficient)
      */ 
 
-    public User(String username, String password, String email, String name) {
+    public AppUser(String username, String password, String email, String name) {
         this.username = username;
         this.password = password;
         this.email = email;
