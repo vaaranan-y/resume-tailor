@@ -9,7 +9,6 @@ import com.vyogalin.resume_tailor_backend.models.AppUser;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -21,7 +20,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public AppUser registerUser(AppUser user) {
+    // public AppUser registerUser(AppUser user) {
+    //     // Save user with hashed password
+    //     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    //     return userRepository.save(user);
+    // }
+
+    public AppUser registerUserRaw(String username, String email, String password) {
+        userRepository.findByUsername(username).ifPresent(user -> {
+            throw new RuntimeException("User already exists!");
+        });
+
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+
         // Save user with hashed password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor 
+@Table(name = "app_users")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
