@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor 
-@Table(name = "app_users")
+// @Table(name = "app_users")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +18,6 @@ public class AppUser {
     private String username;
     private String password;
     private String email;
-    private String name;
     private List<String> applicationIds; // Uniquely stored in Applications Table
 
     // Things to keep in mind;
@@ -27,11 +26,10 @@ public class AppUser {
         2. Add lazy getters for lazy loading (i.e. make loading PDFs more efficient)
      */ 
 
-    public AppUser(String username, String password, String email, String name) {
+    public AppUser(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.name = name;
     }
 
     public String getUsername() {

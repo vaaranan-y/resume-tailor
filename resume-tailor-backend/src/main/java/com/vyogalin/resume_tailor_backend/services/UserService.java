@@ -31,9 +31,7 @@ public class UserService {
             throw new RuntimeException("User already exists!");
         });
 
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
+        AppUser user = new AppUser(username, email, password);
 
         // Save user with hashed password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
