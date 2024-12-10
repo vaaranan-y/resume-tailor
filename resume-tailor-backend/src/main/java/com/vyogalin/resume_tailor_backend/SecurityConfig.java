@@ -6,10 +6,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -23,8 +32,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // @Override
-    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    //     auth.userDetailsService(userDetailsService).BCryptPasswordEncoder(bCryptPasswordEncoder);
-    // }
+    @Bean
+    public UserDetailsService getUserDetailsService() {
+        return this.userDetailsService;
+    }
+
+    public AuthenticationProvider getAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+        return provider;
+    }
+
 }
