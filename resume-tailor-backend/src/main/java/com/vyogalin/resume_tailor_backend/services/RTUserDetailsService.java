@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.vyogalin.resume_tailor_backend.models.AppUser;
+import com.vyogalin.resume_tailor_backend.models.RTUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.vyogalin.resume_tailor_backend.repositories.RTUserRepository;
 
@@ -23,7 +23,7 @@ public class RTUserDetailsService {
 
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser userEntity = userRepository.findByUsername(username);
+        RTUser userEntity = userRepository.findByUsername(username);
         
         if (userEntity == null) {
             throw new UsernameNotFoundException("Unable to find user: " + username);
@@ -36,26 +36,26 @@ public class RTUserDetailsService {
         );
     }
 
-    // public Optional<AppUser> getUserByUsername(String username) {
+    // public Optional<RTUser> getUserByUsername(String username) {
     //     return userRepository.findByUsername(username);
     // }
 
-    // public List<AppUser> getAllUsers(String email) {
+    // public List<RTUser> getAllUsers(String email) {
     //     return userRepository.findAll();
     // }
 
-    // // public AppUser registerUser(AppUser user) {
+    // // public RTUser registerUser(RTUser user) {
     // //     // Save user with hashed password
     // //     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     // //     return userRepository.save(user);
     // // }
 
-    // public AppUser registerUserRaw(String username, String email, String password) {
+    // public RTUser registerUserRaw(String username, String email, String password) {
     //     userRepository.findByUsername(username).ifPresent(user -> {
     //         throw new RuntimeException("User already exists!");
     //     });
 
-    //     AppUser user = new AppUser(username, email, password);
+    //     RTUser user = new RTUser(username, email, password);
 
     //     // Save user with hashed password
     //     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
